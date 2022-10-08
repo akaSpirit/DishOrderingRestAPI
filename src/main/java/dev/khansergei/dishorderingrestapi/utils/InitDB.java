@@ -1,53 +1,90 @@
 package dev.khansergei.dishorderingrestapi.utils;
 
+import dev.khansergei.dishorderingrestapi.dao.ClientDao;
+import dev.khansergei.dishorderingrestapi.dao.DishDao;
+import dev.khansergei.dishorderingrestapi.dao.OrderDao;
+import dev.khansergei.dishorderingrestapi.dao.PlaceDao;
+import dev.khansergei.dishorderingrestapi.dto.ClientDto;
+import dev.khansergei.dishorderingrestapi.dto.DishDto;
+import dev.khansergei.dishorderingrestapi.dto.OrderDto;
+import dev.khansergei.dishorderingrestapi.dto.PlaceDto;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
 public class InitDB {
-    //    @Bean
-//    public String init(UserDao userDao, TaskDao taskDao) {
-//    List<Task> tasks = generateTasks(100, days);
+    @Bean
+    public String init(PlaceDao placeDao, DishDao dishDao, ClientDao clientDao, OrderDao orderDao) {
+        clientDao.dropTable();
+        clientDao.dropTableAuth();
+        placeDao.dropTable();
+        dishDao.dropTable();
+        orderDao.dropTable();
 
-//        taskDao.dropTable();
-//        userDao.dropTableAuth();
-//        userDao.dropTableUsers();
-//
-//        userDao.createTableUsers();
-//        userDao.createTableAuth();
-//        taskDao.createTable();
-//
-//        userDao.addData(addUsers());
-//        taskDao.addData(addTasks());
-//        return "init...";
-//    }
+        clientDao.createTable();
+        clientDao.createTableAuth();
+        placeDao.createTable();
+        dishDao.createTable();
+        orderDao.createTable();
 
+        clientDao.addData(addClients());
+        placeDao.addData(addPlaces());
+        dishDao.addData(addDishes());
+        orderDao.addData(addOrders());
+        return "init...";
+    }
 
-//    private List<Task> generateTasks(Integer number, List<LocalDate> days) {
-//
-//        Integer count = 0;
-//        List<TaskType> types = List.of(TaskType.values());
-//        List<Task> tasks = new ArrayList<>();
-//
-//        while (count < number) {
-//            Integer id = 1;
-//            if (tasks.size() != 0) {
-//                id = tasks.stream().
-//                        max(Comparator.comparingInt(Task::getId))
-//                        .get()
-//                        .getId() + 1;
-//            }
-//
-//            LocalDate date = days.get(new Random().nextInt(days.size()));
-//
-//            TaskType type = types.get(new Random().nextInt(types.size()));
-//            String taskName = Generator.makeName();
-//            String taskDesc = Generator.makeDescription();
-//            Task task = new Task(id, date, taskName, type.toString(), taskDesc);
-//            tasks.add(task);
-//            count = count + 1;
-//        }
-//
-//        return tasks;
-//    }
+    private List<ClientDto> addClients() {
+        List<ClientDto> clients = new ArrayList<>();
+        clients.add(new ClientDto("Homer Skoog", "homer@gmail.com", "qwe", true));
+        clients.add(new ClientDto("Exie Flegle", "exie@gmail.com", "qwe", true));
+        clients.add(new ClientDto("Zane Foland", "zane@gmail.com", "qwe", true));
+        clients.add(new ClientDto("Gaston Pascal", "gaston@gmail.com", "qwe", true));
+        clients.add(new ClientDto("Valrie Lajoie", "valrie@gmail.com", "qwe", true));
+        return clients;
+    }
 
+    private List<PlaceDto> addPlaces() {
+        List<PlaceDto> places = new ArrayList<>();
+        places.add(new PlaceDto("Italian Pizzeria", "Wood oven baked pizzas and pastas"));
+        places.add(new PlaceDto("That Bar", "Little bit of everything"));
+        places.add(new PlaceDto("The Broken Glass", "Cocktails with a bits of extra glass"));
+        places.add(new PlaceDto("The Salty Sailor", "For weathered folks!"));
+        places.add(new PlaceDto("The Rocinante","Family business only!"));
+        return places;
+    }
+
+    private List<DishDto> addDishes() {
+        List<DishDto> dishes = new ArrayList<>();
+        dishes.add(new DishDto("Margherita", "Pizza", 10, "Italian Pizzeria"));
+        dishes.add(new DishDto("Marinara", "Pizza", 12, "Italian Pizzeria"));
+        dishes.add(new DishDto("Gelato", "Dessert", 2, "That Bar"));
+        dishes.add(new DishDto("Macaroon", "Dessert", 4, "That Bar"));
+        dishes.add(new DishDto("Espresso", "Hot Beverage", 3, "The Salty Sailor"));
+        dishes.add(new DishDto("Herbal tea", "Hot Beverage", 3, "The Salty Sailor"));
+        dishes.add(new DishDto("Ancient Mariner", "Cocktail", 7, "The Broken Glass"));
+        dishes.add(new DishDto("Three Wise Men", "Cocktail", 8, "The Broken Glass"));
+        dishes.add(new DishDto("Vat grown steak", "Belter food", 20, "The Rocinante"));
+        dishes.add(new DishDto("Red kibble", "Belter food", 10, "The Rocinante"));
+        return dishes;
+    }
+
+    private List<OrderDto> addOrders() {
+        List<OrderDto> orders = new ArrayList<>();
+        orders.add(new OrderDto("homer@gmail.com", "Margherita", LocalDateTime.now()));
+        orders.add(new OrderDto("homer@gmail.com", "Herbal tea", LocalDateTime.now()));
+        orders.add(new OrderDto("exie@gmail.com", "Marinara", LocalDateTime.now()));
+        orders.add(new OrderDto("exie@gmail.com", "Gelato", LocalDateTime.now()));
+        orders.add(new OrderDto("zane@gmail.com", "Espresso", LocalDateTime.now()));
+        orders.add(new OrderDto("zane@gmail.com", "Vat grown steak", LocalDateTime.now()));
+        orders.add(new OrderDto("gaston@gmail.com", "Red kibble", LocalDateTime.now()));
+        orders.add(new OrderDto("gaston@gmail.com", "Macaroon", LocalDateTime.now()));
+        orders.add(new OrderDto("valrie@gmail.com", "Ancient Mariner", LocalDateTime.now()));
+        orders.add(new OrderDto("valrie@gmail.com", "Three Wise Men", LocalDateTime.now()));
+        return orders;
+    }
 }

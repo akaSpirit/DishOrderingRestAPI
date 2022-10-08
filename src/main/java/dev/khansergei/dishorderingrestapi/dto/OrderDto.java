@@ -19,4 +19,10 @@ public class OrderDto {
     @JsonProperty("dish_name")
     private String dishName;
     private LocalDateTime time;
+
+    public OrderDto(String userEmail, String dishName, LocalDateTime time) {
+        this.userEmail = userEmail;
+        this.dishName = dishName;
+        this.time = time;
+    }
 }

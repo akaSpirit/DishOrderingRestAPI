@@ -14,4 +14,12 @@ public class DishDto {
     private String name;
     private String type;
     private Integer price;
+    private String place;
+
+    public DishDto(String name, String type, Integer price, String place) {
+        this.name = name;
+        this.type = type;
+        this.price = price;
+        this.place = place;
+    }
 }
