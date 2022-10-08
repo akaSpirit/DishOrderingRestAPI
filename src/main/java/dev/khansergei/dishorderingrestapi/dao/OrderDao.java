@@ -1,8 +1,8 @@
 package dev.khansergei.dishorderingrestapi.dao;
 
-import dev.khansergei.dishorderingrestapi.dto.DishDto;
 import dev.khansergei.dishorderingrestapi.dto.OrderDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -40,4 +40,22 @@ public class OrderDao {
             });
         }
     }
+
+    public OrderDto addOrder(OrderDto order) {
+        String sql = "insert into orders(user_email, dish_name, time) values(?, ?, ?)";
+        jdbcTemplate.update(sql, order.getUserEmail(), order.getDishName(), Timestamp.valueOf(order.getTime()));
+
+        return OrderDto.builder()
+                .id(order.getId())
+                .userEmail(order.getUserEmail())
+                .dishName(order.getDishName())
+                .time(order.getTime())
+                .build();
+    }
+
+    public List<OrderDto> findAllOrdersByEmail(String name) {
+        String sql = "select * from orders where user_email = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(OrderDto.class), name);
+    }
+
 }

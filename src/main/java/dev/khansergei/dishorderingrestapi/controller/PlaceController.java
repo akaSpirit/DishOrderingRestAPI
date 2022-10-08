@@ -1,6 +1,5 @@
 package dev.khansergei.dishorderingrestapi.controller;
 
-import dev.khansergei.dishorderingrestapi.dto.DishDto;
 import dev.khansergei.dishorderingrestapi.dto.PlaceDto;
 import dev.khansergei.dishorderingrestapi.service.PlaceService;
 import lombok.RequiredArgsConstructor;

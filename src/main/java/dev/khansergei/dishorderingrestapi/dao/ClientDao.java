@@ -1,7 +1,6 @@
 package dev.khansergei.dishorderingrestapi.dao;
 
 import dev.khansergei.dishorderingrestapi.dto.ClientDto;
-import dev.khansergei.dishorderingrestapi.dto.DishDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,11 +45,6 @@ public class ClientDao {
         jdbcTemplate.update(sql);
     }
 
-    private void createAuthority(String email) {
-        String sql = "insert into authorities(username, authority) values(?, 'USER')";
-        jdbcTemplate.update(sql, email);
-    }
-
     public void addData(List<ClientDto> clients) {
         String sql = "insert into clients(name, email, password, enabled) values(?, ?, ?, ?)";
         String sqlAuth = "insert into authorities(username, authority) values(?, ?)";
@@ -66,5 +60,11 @@ public class ClientDao {
             });
             jdbcTemplate.update(sqlAuth, clients.get(i).getEmail(), "USER");
         }
+    }
+
+    public boolean isClientExist(String name) {
+        String sql = "select count(*) from clients where email = ?";
+        var count = jdbcTemplate.queryForObject(sql, Integer.class, name);
+        return count == 1;
     }
 }

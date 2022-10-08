@@ -1,6 +1,5 @@
 package dev.khansergei.dishorderingrestapi.dao;
 
-import dev.khansergei.dishorderingrestapi.dto.DishDto;
 import dev.khansergei.dishorderingrestapi.dto.PlaceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;

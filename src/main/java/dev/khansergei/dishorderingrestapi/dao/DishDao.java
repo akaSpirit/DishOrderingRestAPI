@@ -46,4 +46,16 @@ public class DishDao {
         String sql = "select * from dishes where place = ?";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(DishDto.class), name);
     }
+
+    public boolean isDishExist(String name) {
+        String sql = "select count(*) from dishes where name = ?";
+        var count = jdbcTemplate.queryForObject(sql, Integer.class, name);
+        return count == 1;
+    }
+
+    public boolean isDishExistInPlace(String dish_name, String place_name) {
+        String sql = "select count(*) from dishes where name = ? and place = ?";
+        var count = jdbcTemplate.queryForObject(sql, Integer.class, dish_name, place_name);
+        return count == 1;
+    }
 }

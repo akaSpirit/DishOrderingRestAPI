@@ -1,17 +1,11 @@
 package dev.khansergei.dishorderingrestapi.controller;
 
-import dev.khansergei.dishorderingrestapi.dto.OrderDto;
 import dev.khansergei.dishorderingrestapi.service.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
@@ -19,9 +13,16 @@ import java.time.LocalDateTime;
 public class OrderController {
     private final OrderService orderService;
 
-//    @PostMapping("/add")
-//    public ResponseEntity<OrderDto> addOrder(@RequestParam String dish_name) {
-//        return new ResponseEntity<>(orderService.addOrder(dish_name), HttpStatus.OK);
-//    }
+    @PostMapping("/add")
+    public ResponseEntity<?> addOrder(@RequestParam String dish_name,
+                                      @RequestParam String place_name,
+                                      Authentication auth) {
+        return new ResponseEntity<>(orderService.addOrder(dish_name, place_name, auth), HttpStatus.OK);
+    }
+
+    @GetMapping  //find all user's orders
+    public ResponseEntity<?> findAllOrdersByEmail(Authentication auth) {
+        return new ResponseEntity<>(orderService.findAllOrdersByEmail(auth), HttpStatus.OK);
+    }
 
 }
