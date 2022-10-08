@@ -62,14 +62,24 @@ public class InitDB {
         List<DishDto> dishes = new ArrayList<>();
         dishes.add(new DishDto("Margherita", "Pizza", 10, "Italian Pizzeria"));
         dishes.add(new DishDto("Marinara", "Pizza", 12, "Italian Pizzeria"));
+        dishes.add(new DishDto("Quattro Stagioni", "Pizza", 15, "Italian Pizzeria"));
+        dishes.add(new DishDto("Quattro Formaggi", "Pizza", 13, "Italian Pizzeria"));
         dishes.add(new DishDto("Gelato", "Dessert", 2, "That Bar"));
         dishes.add(new DishDto("Macaroon", "Dessert", 4, "That Bar"));
+        dishes.add(new DishDto("Pumpkin pie", "Dessert", 8, "That Bar"));
+        dishes.add(new DishDto("Sweet roll", "Dessert", 5, "That Bar"));
         dishes.add(new DishDto("Espresso", "Hot Beverage", 3, "The Salty Sailor"));
         dishes.add(new DishDto("Herbal tea", "Hot Beverage", 3, "The Salty Sailor"));
+        dishes.add(new DishDto("Apple cider", "Hot Beverage", 6, "The Salty Sailor"));
+        dishes.add(new DishDto("Masala Chai", "Hot Beverage", 4, "The Salty Sailor"));
         dishes.add(new DishDto("Ancient Mariner", "Cocktail", 7, "The Broken Glass"));
         dishes.add(new DishDto("Three Wise Men", "Cocktail", 8, "The Broken Glass"));
+        dishes.add(new DishDto("Brass Monkey", "Cocktail", 8, "The Broken Glass"));
+        dishes.add(new DishDto("Cooperstown Cocktail", "Cocktail", 6, "The Broken Glass"));
         dishes.add(new DishDto("Vat grown steak", "Belter food", 20, "The Rocinante"));
-        dishes.add(new DishDto("Red kibble", "Belter food", 10, "The Rocinante"));
+        dishes.add(new DishDto("Red kibble", "Belter food", 11, "The Rocinante"));
+        dishes.add(new DishDto("White kibble", "Belter food", 10, "The Rocinante"));
+        dishes.add(new DishDto("Yeast based booze", "Belter food", 14, "The Rocinante"));
         return dishes;
     }
 
@@ -77,8 +87,12 @@ public class InitDB {
         List<OrderDto> orders = new ArrayList<>();
         orders.add(new OrderDto("homer@gmail.com", "Margherita", LocalDateTime.now()));
         orders.add(new OrderDto("homer@gmail.com", "Herbal tea", LocalDateTime.now()));
+        orders.add(new OrderDto("homer@gmail.com", "Macaroon", LocalDateTime.now()));
+        orders.add(new OrderDto("homer@gmail.com", "Quattro Formaggi", LocalDateTime.now()));
+        orders.add(new OrderDto("homer@gmail.com", "Brass Monkey", LocalDateTime.now()));
         orders.add(new OrderDto("exie@gmail.com", "Marinara", LocalDateTime.now()));
         orders.add(new OrderDto("exie@gmail.com", "Gelato", LocalDateTime.now()));
+        orders.add(new OrderDto("exie@gmail.com", "Yeast based booze", LocalDateTime.now()));
         orders.add(new OrderDto("zane@gmail.com", "Espresso", LocalDateTime.now()));
         orders.add(new OrderDto("zane@gmail.com", "Vat grown steak", LocalDateTime.now()));
         orders.add(new OrderDto("gaston@gmail.com", "Red kibble", LocalDateTime.now()));
