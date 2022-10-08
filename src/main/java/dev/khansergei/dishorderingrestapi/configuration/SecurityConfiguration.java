@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery("select email, password, enabled "
-                        + "from users "
+                        + "from clients "
                         + "where email = ?")
                 .authoritiesByUsernameQuery("select username, authority "
                         + "from authorities "
@@ -40,7 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/tasks/**").fullyAuthenticated();
+                .antMatchers("/orders/**").fullyAuthenticated();
 
         http.authorizeRequests()
                 .anyRequest()
