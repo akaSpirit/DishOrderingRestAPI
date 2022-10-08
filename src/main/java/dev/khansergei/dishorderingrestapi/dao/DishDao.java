@@ -1,8 +1,8 @@
 package dev.khansergei.dishorderingrestapi.dao;
 
 import dev.khansergei.dishorderingrestapi.dto.DishDto;
-import dev.khansergei.dishorderingrestapi.dto.PlaceDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
@@ -40,5 +40,10 @@ public class DishDao {
                 return ps;
             });
         }
+    }
+
+    public List<DishDto> findAllDishesByPlace(String name) {
+        String sql = "select * from dishes where place = ?";
+        return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(DishDto.class), name);
     }
 }

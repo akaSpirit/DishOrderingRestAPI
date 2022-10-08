@@ -1,5 +1,6 @@
 package dev.khansergei.dishorderingrestapi.dao;
 
+import dev.khansergei.dishorderingrestapi.dto.DishDto;
 import dev.khansergei.dishorderingrestapi.dto.PlaceDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -42,5 +43,11 @@ public class PlaceDao {
     public List<PlaceDto> findAllPlaces() {
         String sql = "select * from places";
         return jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(PlaceDto.class));
+    }
+
+    public boolean isPlaceExist(String name) {
+        String sql = "select count(*) from places where name = ?";
+        var count = jdbcTemplate.queryForObject(sql, Integer.class, name);
+        return count == 1;
     }
 }
